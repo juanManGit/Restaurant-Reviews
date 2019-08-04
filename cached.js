@@ -54,7 +54,7 @@ self.addEventListener('fetch', function(event) {
             return response;
         })
         .catch(err=>{
-            console.error("File was not found in cache");
+            console.error("File was not found in cache!" );
             return fetch(event.request);
         })
     );
