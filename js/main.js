@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchCuisines();
 });
 
-//Service Worker register
+//Service Worker Register 
 (function sw () {
   navigator.serviceWorker
     .register('cached.js', { scope: '/' })
