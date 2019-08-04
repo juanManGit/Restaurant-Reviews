@@ -50,7 +50,7 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
       caches.match(event.request, {'ignoreSearch': true})
         .then(response => {
-          // if cached then serve the page
+          // If page is in cache serve
             return response;
         })
         .catch(err=>{
