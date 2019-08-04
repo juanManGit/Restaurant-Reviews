@@ -4,6 +4,8 @@ let restaurants,
 var newMap
 var markers = []
 
+
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -12,6 +14,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
 });
+
+//Service Worker register
+(function sw () {
+  navigator.serviceWorker
+    .register('cached.js', { scope: '/' })
+      .then(reg => console.log('Service worker successfully registered'))
+      .catch(err => {
+        console.log("SW could not be registered!");
+      });
+
+  })();
 
 /**
  * Fetch all neighborhoods and set their HTML.
@@ -214,12 +227,6 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 } 
 
 //Registers a Service Worker. If service worker is supported register the service worker script.
-if (navigator.serviceWorker) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('cached.js')
-      .then(reg => console.log('Service worker successfully registered'))
-      .catch(err => console.log(`Service Worker: Error: ${err}`));
-  });
-}
+
+
 
