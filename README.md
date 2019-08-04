@@ -29,5 +29,5 @@ None.
 Assets provided by Udacity
 
 ## Contributors
-Traversy Media (Service worker sample script)
+
 
