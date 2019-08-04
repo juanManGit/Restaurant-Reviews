@@ -46,16 +46,27 @@ self.addEventListener('activate', event => {
 
 //Listen for a fetch event. If it matches the cache it serves the cached file to the browser
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-      caches.match(event.request, {'ignoreSearch': true})
-        .then(response => {
-          // if cached then serve the page
-            return response;
-        })
-        .catch(err=>{
-            console.error("File was not found in cache");
-            return fetch(event.request);
-        })
-    );
-  });
+// self.addEventListener('fetch', function(event) {
+//     event.respondWith(
+//       caches.match(event.request, {'ignoreSearch': true})
+//         .then(response => {
+//           // if cached then serve the page
+//             return response;
+//         })
+//         .catch(err=>{
+//             console.error("File was not found in cache");
+//             return fetch(event.request);
+//         })
+//     );
+//   });
+
+// Call Fetch Event
+self.addEventListener('fetch', event => {
+  console.log('Service Worker: Fetching');
+  //Attempt to fetch asset from network
+  event.respondWith(
+    fetch(event.request)
+    //If asset or network are not available attempt to load from cache
+    .catch(() => caches.match(event.request, {'ignoreSearch': true})));
+});
+
